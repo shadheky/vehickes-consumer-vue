@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <router-view id="main-view"/>
+  <router-view id="main-view" :baseURL="baseURL"/>
 </template>
 
 <script>
@@ -9,6 +9,12 @@
   export default{
     components:{
       Header
+    },
+    data(){
+      return{
+        baseURL:"http://localhost:8080"
+
+      }
     }
   }
 

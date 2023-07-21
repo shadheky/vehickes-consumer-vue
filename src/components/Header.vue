@@ -1,14 +1,14 @@
 <template>
     <header id="menu">
-        <span id="logo">
+        <span id="logo" @click="closeMobileMenu()">
             <router-link to="/">Luiz</router-link>
         </span>
         <ul options>
             <li>
-                <router-link to="/">Consulta</router-link>
+                <router-link to="/consulta">Consulta</router-link>
             </li>
             <li>
-                <router-link to="/projects">Projetos</router-link></li>
+                <router-link to="/modelos">Modelos</router-link></li>
             <li>
                 <router-link to="/about">About</router-link>
             </li>
@@ -19,10 +19,11 @@
         <div id="mobile-options" v-show="mobileMenuIsShowded">  
              <ul>
             <li>
-                <router-link to="/" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Consulta</Button></router-link>
+                <router-link to="/consulta" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Consulta</Button></router-link>
             </li>
             <li>
-                <router-link to="/projects" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Projects</Button></router-link></li>
+                <router-link to="/modelos" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Modelos</Button></router-link>
+            </li>
             <li>
                 <router-link to="/about" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">About</Button></router-link>
             </li>
@@ -42,6 +43,10 @@
         methods:{
             changeCurrentMobileMenuSituation(){
                 this.mobileMenuIsShowded = !this.mobileMenuIsShowded;
+            },
+            closeMobileMenu(){
+                this.mobileMenuIsShowded = false;
+
             }
         }
     }

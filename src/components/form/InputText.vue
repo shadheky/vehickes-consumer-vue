@@ -1,5 +1,5 @@
 <template>
-     <input type="text" :name="inputFetures.name" :autocomplete="inputFetures.autocomplete" :placeholder="inputFetures.placeholder">
+     <input type="text" :name="inputFetures.name" :autocomplete="inputFetures.autocomplete" :placeholder="inputFetures.placeholder" v-model="v">
 </template>
 
 <script>
