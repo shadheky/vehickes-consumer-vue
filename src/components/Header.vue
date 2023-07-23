@@ -10,7 +10,7 @@
             <li>
                 <router-link to="/modelos">Modelos</router-link></li>
             <li>
-                <router-link to="/about">About</router-link>
+                <router-link to="/Login">Login</router-link>
             </li>
         </ul>  
        <button @click="changeCurrentMobileMenuSituation()">
@@ -25,7 +25,7 @@
                 <router-link to="/modelos" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Modelos</Button></router-link>
             </li>
             <li>
-                <router-link to="/about" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">About</Button></router-link>
+                <router-link to="/login" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Login</Button></router-link>
             </li>
         </ul> 
     </div>

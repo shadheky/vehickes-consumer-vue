@@ -1,5 +1,5 @@
 <template>
-     <input type="text" :name="inputFetures.name" :autocomplete="inputFetures.autocomplete" :placeholder="inputFetures.placeholder" v-model="v">
+     <input :type="type" :name="inputFetures.name" :autocomplete="inputFetures.autocomplete" :placeholder="inputFetures.placeholder" v-model="v">
 </template>
 
 <script>
@@ -9,9 +9,17 @@
             inputFetures:{
                 name:"",
                 autocomplete:"off",
-                placeholder:""
+                placeholder:"",
+                isPassword:false
+            }
+        },
+        data(){
+            return{
+                type: this.inputFetures.isPassword?'password':'text'
             }
         }
+        
+
     }
 
 </script>

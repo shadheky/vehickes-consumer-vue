@@ -2,62 +2,91 @@
    <div class="search-container">
         <h1>Pesquise o Modelo</h1>
         <div id="serach-bar">
-            <input placeholder="Onix" type="text">
+            <input @keyup="showModelsInfo()" placeholder="Onix" type="text" v-model="modelName">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-        <div id="models-info">
+        <div id="models-info" v-show="tableIsShow">
             <table>
-               <tr>
+               <thead class="t-head">
                     <th>
                         Marca
                     </th>
                     <th>
-                        Nome
+                        Nome-ID
                     </th>
                     <th>
-                        Fabri-Ano
+                       Ano-Fabri
                     </th>
                     <th>
-                        Modelo-Ano
+                        Ano-Mdlo
                     </th>
                     <th>
-                        Quantidade-passageiros
+                        Passageiros
                     </th>
-               </tr>
-                <tr>
+               </thead>
+                <tr v-for="model in modelsData" :key="model.id">
                     <td>
-                        Chevrolet
+                        {{ model.brand }}
                     </td>
                     <td>
-                        Onix
+                        {{ model.modelName }} {{model.id}}
                     </td>
                     <td>
-                        2020
+                        {{ model.fabricationYear }}
                     </td>
                     <td>
-                        2021
+                        {{ model.modelYear }}
                     </td>
                     <td>
-                        5
+                        {{ model.passengers }}
                     </td>
                 </tr>
             </table>
-            <p>Não encontrou o modelo desejado? Adicione</p>
+            <p>Não encontrou o modelo desejado? <router-link to="/modelos/cadastro" class="link">Adicione</router-link> </p>
            
         </div>
    </div>
 </template>
-<!--
-     {"id":1,
-     "brand":"Chevrolet",
-     "modelName":"Onix",
-     "fabricationYear":"2023",
-     "modelYear":"2023",
-     "passengers":5} -->
+
 <script>
 
+    export default {
+        name:"ModelsView",
+        props:{
+            baseURL:String
+        },
+        data(){
+            return{
+                modelsData: [],
+                tableIsShow:false,
+                modelName: ""
+            }
+
+        },
+        methods:{
+            async findModels(name){
+
+         
+
+                const req =  await fetch(this.baseURL + `/api/models/find/${name}`);
+
+                this.modelsData = await req.json();
+            },
+            showModelsInfo(){
+                if(this.modelName === "" || this.modelName.match(/ {1,}/)){
+                    this.tableIsShow = false;
+                    return;
+                }
+                this.findModels(this.modelName);
+                this.tableIsShow = true;
+            }
+        }
+    }
 
 </script>
+
+
+
 
 <style scoped>
     .search-container{
@@ -74,8 +103,8 @@
         border: 1px solid #ccc;
         width: 70%;
         padding: 6px 20px;
-        border-radius: 4px;
-        max-width: 800px;
+        border-radius: 30px;
+        max-width: 550px;
     }
 
     input{
@@ -92,6 +121,9 @@
     
     i{
         cursor: pointer;
+        width: 8%;
+        text-align: center;
+
     }
 
    
@@ -109,24 +141,31 @@
     margin: auto;
     margin-top: 20px;
     max-width: 800px;
+    border: 1px solid #000000;
   
+    border-radius: 5px;
+    overflow: hidden;
   }
 
-  td {
+  .t-head{
+    background-color: #36304a;
+    color: rgb(255, 255, 255);
+  }
+
+
+  td, th{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding: 12px 12px;
+ 
 }
 
-  tr{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+  
     
-  }
-   
-  tr:hover{
-    background-color: #ccc;
-  }
+    table tr:nth-child(odd){
+        background-color: #ccc;
+    }
 
 
   #models-info p{
@@ -134,5 +173,14 @@
     margin-top: 20px;
   }
 
- 
+  .link{
+    text-decoration: underline;
+  }
+
+  @media (max-width:700px){
+    table{
+        width: 95%;
+    }
+  }
+
 </style>

@@ -77,25 +77,7 @@
 
 <script>
  
-  // purchaseDate": "2023-07-17",
-  //       "renavam": "11111111111",
-  //       "color": "Azul",
-  //       "modelId": 1,
-  //       "plateLocation": "Belem-PA",
-  //       "service": "BrazilPlateService",
-  //       "previousPlateValue": "",
-  //       "plateValue": "LDG9996",
-  //       "ownerName": "Luiz Alberto",
-  //       "ownerCpf": "01409489299",
-  //       "tickets": [
-  //           {
-  //               "postingDate": "17/07/2023",
-  //               "description": "Multa de velocidade alta",
-  //               "type": "SERIUS",
-  //               "status": "PENDANT"
-  //           }
-  //       ]
-  //   }
+
 
 
   import InputText from '@/components/form/InputText.vue';

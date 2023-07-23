@@ -13,6 +13,16 @@
    </div>
 </template>
 
+<script>
+export default {
+    props:{
+        baseURL:String,
+        AuthorizationBearer:String
+    }
+}
+</script>
+
+
 <style scoped>
     .alert-container{
        background-color: #ccc;
@@ -32,6 +42,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 2px;
+        max-width: 600px;
     }
 
     h1{
