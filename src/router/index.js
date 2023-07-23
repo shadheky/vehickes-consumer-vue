@@ -4,6 +4,8 @@ import AlertView from '../views/AlertView.vue'
 import ModelsView from "../views/ModelsView.vue"
 import ModelFormView from "../views/ModelFormView.vue"
 import LoginView from "../views/LoginView.vue"
+import UserFormView from "../views/UserFormView.vue"
+
 
 const routes = [
   {
@@ -20,6 +22,11 @@ const routes = [
     path: '/usuario/login',
     name: 'LoginView',
     component: LoginView
+  },
+  {
+    path: '/usuario/cadastro',
+    name: 'UserFormView',
+    component: UserFormView
   },
   {
     path: '/modelos',

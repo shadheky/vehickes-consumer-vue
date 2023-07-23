@@ -13,7 +13,7 @@
 
     <div id="query-content" v-show="!queryContentIsHide">
 
-        <i @click="reload()" class="fa-solid fa-arrow-left"></i>
+        <i @click="returnToConsult" class="fa-solid fa-arrow-left"></i>
     
       <div>Informações do veículo</div>
           <div id="vehicle-info">
@@ -146,8 +146,10 @@
       showQueryContent(){
         this.queryContentIsHide = false;
       },
-      reload(){
-        this.$router.go();
+      returnToConsult(){
+        this.queryContentIsHide = true;
+        this.modelData = {};
+        this.$emit('clearForm', this.form);
       }
 
      }

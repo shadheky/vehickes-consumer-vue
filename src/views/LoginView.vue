@@ -18,7 +18,7 @@
 
         <button @click="$emit('authenticate', userName, password)" class="btn btn-primary">Logar</button>
     </form>
-    <p>Ainda não possui cadastro? <router-link to="/">Cadastrar-se</router-link> </p>
+    <p>Ainda não possui cadastro? <router-link to="/usuario/cadastro">Cadastrar-se</router-link> </p>
     </div>
   </div>
 </template>
