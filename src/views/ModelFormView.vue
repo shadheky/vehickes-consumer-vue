@@ -3,49 +3,90 @@
         <h1>Cadastro de modelo</h1>
         <form action="">
         <label for="plateValue">Marca do modelo</label>
-        <InputText :inputFetures="{
-            name:'marca',
-            autocomplete:'off',
-            placeholder:'Chevrolet'
-        }"/>  
+        <input type="text" 
+            name='marca'
+            autocomplete='off'
+            placeholder='Chevrolet'
+         v-model="modelForm.brand"/>  
          <label for="plateValue">Nome do modelo</label>
-         <InputText :inputFetures="{
-            name:'nome',
-            autocomplete:'off',
-            placeholder:'Onix'
-        }"/> 
+         <input type="text" 
+            name='nome'
+            autocomplete='off'
+            placeholder='Onix'
+         v-model="modelForm.modelName"/>  
          <label for="plateValue">Ano de fabricação</label> 
-           <InputNumber :inputFetures="{
-            name:'fabriAno',
-            autocomplete:'off',
-            placeholder:'2020'
-        }"/> 
+           <input type="number"
+            name='fabriAno'
+            autocomplete='off'
+            placeholder='2020'
+         v-model="modelForm.fabricationYear"/> 
             <label for="plateValue">Ano do modelo</label> 
-           <InputNumber :inputFetures="{
-            name:'modelAno',
-            autocomplete:'off',
-            placeholder:'2021'
-        }"/>  
+           <input type="number" 
+            name='modelAno'
+            autocomplete='off'
+            placeholder='2021'
+        v-model="modelForm.modelYear"/>  
          <label for="plateValue">Quantidade de passageiros</label> 
-        <InputNumber :inputFetures="{
-            name:'passengers',
-            autocomplete:'off',
-            placeholder:'5'
-        }"/>  
+        <input type="number"
+            name='passengers'
+            autocomplete='off'
+            placeholder='5'
+        v-model="modelForm.passengers"/>  
 
-        <button type="button" class="btn btn-success">Cadastrar</button>
+        <button @click="persitModel" type="button" class="btn btn-success">Cadastrar</button>
         <router-link to="/" class="btn btn-danger">Cancelar</router-link>
     </form>
     </div>
 </template>
 
 <script>
-    import InputText from '@/components/form/InputText.vue';
-    import InputNumber from '@/components/form/InputNumber.vue';
+ 
+
     export default{
-        components:{
-            InputText,
-            InputNumber
+        
+        data(){
+           return{ 
+                 modelForm:{
+                    brand:"",
+                    modelName:"",
+                    fabricationYear:"",
+                    modelYear:"",
+                    passengers:null
+
+                 },
+                message:""
+            }
+        },
+        props:{
+            baseURL:String,
+            bearerToken:String
+        },
+        methods:{
+            async persitModel(){
+                if(this.bearerToken === ''){
+                    this.$emit('showMessage', 'Realize o login');
+                    return
+                }
+                const req = await fetch(this.baseURL + "/api/models", {
+                    method:'post',
+                    body: JSON.stringify(this.modelForm),
+                    headers:{
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${this.bearerToken}`
+                    }
+                });
+
+                if(req.status === 403){
+                    this.$emit('showMessage', 'Usuário não autorizado');
+                }else if(req.status === 400){
+                    this.$emit('showMessage', 'Preencha os campos corretamente');   
+                }else{
+                    this.$emit('showMessage', 'Modelo cadatrado')
+                    this.$emit('clearForm', this.modelForm)
+                }
+
+            }
+           
         }
     }
 

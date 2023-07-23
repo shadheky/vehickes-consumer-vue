@@ -1,5 +1,5 @@
 <template>
-    <div v-show="!hide">
+    <div>
         <span class="content">{{message}}</span>
       
     </div>
@@ -13,10 +13,9 @@
             message:String
         },
         data(){
-            return {
-                hide:false
-            }
-        }
+            
+        },
+      
     }
 
 </script>
@@ -27,7 +26,7 @@
         padding: 10px 20px;
         width: 300px;
         border-radius: 3px;
-        position: absolute;
+        position: fixed;
         top: 4px;
         right: 2%;
         display: flex;
@@ -35,19 +34,8 @@
     }
 
     .content{
-        width: 85%;
-        
+        width: 85%;  
     }   
-    .close{
-        color: red;
-        cursor: pointer;
-        padding: 0px 8px;
-        box-sizing: border-box;
-        border-radius: 2px;
-    }
 
-    .close:hover{
-        background-color: #aaa;
-    }
 
 </style>

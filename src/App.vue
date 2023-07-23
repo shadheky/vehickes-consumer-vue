@@ -1,7 +1,7 @@
 <template>
   <Header></Header>
   <Message :message="message" v-show="message"/>
-  <router-view id="main-view" :baseURL="baseURL" @authenticate="authenticate"/>
+  <router-view id="main-view" @showMessage="showMessgeAndHide" @clearForm="formTools.clearForm" @alertInputs="formTools.alertInputs" @authenticate="authenticate" :baseURL="baseURL" :bearerToken="bearerToken"/>
 </template>
 
 <script>
@@ -20,7 +20,26 @@
       return{
         baseURL:"http://localhost:8080",
         bearerToken:"",
-        message:""
+        message:"",
+        formTools:{
+          clearForm(formModels){
+            if(typeof formModels === 'object'){
+              for(let key in formModels){
+                formModels[key] = ''
+              }
+            }
+          },
+          alertInputs(){
+          document.querySelectorAll('input').forEach(input => {
+            if( input.value === '' ){
+                input.style.borderBottom = "1px solid red"
+                
+            }else{
+              input.style.borderBottom = "1px solid rgba(0, 0, 0, 0.597)"
+            }
+            })
+         }
+        }
 
       }
     },
@@ -38,19 +57,13 @@
            
           }
         });
-
-        console.log({login, password});
-
         if(req.status === 404 || req.status ===  403){
           this.showMessgeAndHide('Credenciais inválidas');
         }else{
-          this.bearerToken = await req.json().token;
+          const res = await req.json();
+          this.bearerToken = res.token;
           this.showMessgeAndHide('Logado com sucesso')
         }
-
-     
-
-
       },
       showMessgeAndHide(text){
         this.message = text;
@@ -80,4 +93,33 @@
         text-decoration: none;
         color: inherit;
     }
+
+    input{
+        width: 80%;
+        height: 45px;
+        border: 0 none;
+        border-bottom: 2px solid #cccccc60;
+        border-radius: 2px;
+        margin-top: 0px;
+        padding: 4px;
+        font-size: 1.2rem;
+        
+  }
+
+  input:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.597);
+  }
+
+  input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
+}
+
 </style>

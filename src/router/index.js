@@ -17,7 +17,7 @@ const routes = [
     component: AlertView
   },
   {
-    path: '/login',
+    path: '/usuario/login',
     name: 'LoginView',
     component: LoginView
   },

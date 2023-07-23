@@ -1,13 +1,12 @@
 <template>
   <div class="query-container">
-    <Message :message="message" v-show="message"/>
     <form action="" id="query-form" v-show="queryContentIsHide">
         <h1>Consulte o seu veículo</h1>
         <label for="plateValue">Número da placa</label>
-        <InputText  :inputFetures="{name:'plateValue', autocomplete:'off', placeholder:'QEZ2738'}" v-model="form.plateValue"/>
+        <input type="text" name='plateValue' autocomplete='off' placeholder='QEZ2738' v-model="form.plateValue"/>
 
         <label for="plateValue">Renavam</label>
-        <InputText :inputFetures="{name:'renavam', autocomplete:'off', placeholder:'481014772'}" v-model="form.renavam"/>
+        <input type="text" name='renavam' autocomplete='off' placeholder='481014772' v-model="form.renavam"/>
         <button @click="findVehicle()" type="button" class="btn btn-success form-button" >Pesquisar</button>
    
     </form>
@@ -80,8 +79,7 @@
 
 
 
-  import InputText from '@/components/form/InputText.vue';
-  import  Message from '@/components/Message.vue';
+ 
 
   export default {
     
@@ -114,10 +112,6 @@
         queryContentIsHide:true
       }
     },
-    components:{
-      InputText,
-      Message
-    },
     props:{
       baseURL:String
     },
@@ -125,43 +119,29 @@
       async findVehicle(){
 
         if(this.form.plateValue === "" || this.form.renavam === ""){
-          this.alertInputs();
+          this.$emit('alertInputs');
+          this.$emit('showMessage', 'Preencha os campos')
           return;
         }
 
         const req = await fetch(`${this.baseURL}/api/vehicles/${this.form.plateValue}/${this.form.renavam}`);
         
         if(req.status === 404){
-          this.showMessgeAndHide("Veiculo não encontrado");
+          this.$emit('showMessage', "Veculo não encontrado");
         }else if(req.status === 200){
           this.vehicleData = await req.json()
           this.findModel(this.vehicleData.modelId);
           this.showQueryContent();
         
         }else{
-          this.showMessgeAndHide("Houve um erro ao carregar as informações");
+          this.$emit('showMessage',"Houve um erro ao carregar as informações");
         }
 
       },
       async findModel(modelId){
         const req = await fetch(`${this.baseURL}/api/models/${modelId}`);
-        
         this.modelData = await req.json();
 
-      },
-      showMessgeAndHide(text){
-        this.message = text;
-        setTimeout( () => this.message = "", 3000)
-      },
-      alertInputs(){
-        document.querySelectorAll('input').forEach(input => {
-          if( input.value === '' ){
-              input.style.borderBottom = "1px solid red"
-              this.showMessgeAndHide("Preencha os campos");
-          }else{
-            input.style.borderBottom = "1px solid rgba(0, 0, 0, 0.597)"
-          }
-        })
       },
       showQueryContent(){
         this.queryContentIsHide = false;

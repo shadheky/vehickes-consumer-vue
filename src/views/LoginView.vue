@@ -4,18 +4,17 @@
       <h1>Login</h1>
     <form action="" @submit="preventDefault">
       
-        <InputText :inputFetures="{
-            name:'userName',
-            autocomplete:'off',
-            placeholder:'Nome de usuário'
-        }" v-model="userName"/>  
+        <input type="text" 
+            name='userName'
+            autocomplete='off'
+            placeholder='Nome de usuário'
+         v-model="userName"/>  
         
-         <InputText :inputFetures="{
-            name:'senha',
-            autocomplete:'off',
-            placeholder:'Senha',
-            isPassword:true
-        }" class="password" v-model="password"/> 
+         <input type="password" 
+            name='senha'
+            autocomplete='off'
+            placeholder='Senha'
+            class="password" v-model="password" /> 
 
         <button @click="$emit('authenticate', userName, password)" class="btn btn-primary">Logar</button>
     </form>
@@ -25,13 +24,10 @@
 </template>
 
 <script>
-  import InputText from '@/components/form/InputText.vue';
+
 
   export default {
     name:"LoginView",
-    components:{
-      InputText
-    },
     data(){
       return{
         userName:"",
@@ -44,19 +40,10 @@
         event.preventDefault();
         
         if(this.userName === "" || this.password === ""){
-          this.alertInputs();
+          this.$emit('alertInputs');
           return;
         }
-      },alertInputs(){
-        document.querySelectorAll('input').forEach(input => {
-          if( input.value === '' ){
-              input.style.borderBottom = "1px solid red"
-              
-          }else{
-            input.style.borderBottom = "1px solid rgba(0, 0, 0, 0.597)"
-          }
-        })
-    }
+      }
   }
   }
 </script>
