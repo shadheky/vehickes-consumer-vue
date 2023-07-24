@@ -62,7 +62,7 @@
     padding: 30px;
     background-color: #fff;
     width: 80%;
-    height: 70vh;
+    height: 70%;
     max-width: 400px;
     margin-top: 5%;
     border: 1px solid #ccc;

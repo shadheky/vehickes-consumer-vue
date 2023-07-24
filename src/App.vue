@@ -13,13 +13,16 @@
       Header,
       Message
     },
-    methods:{
-
+    load(){
+      if(this.bearerToken === ''){
+        this.showMessgeAndHide('Usuário não logado');
+      }
     },
+
     data(){
       return{
         baseURL:"http://localhost:8080",
-        bearerToken:"",
+        bearerToken:"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJMdWl6IEFsYmVydG8iLCJleHAiOjE2OTAyMzEwMDd9.zXCzwxOUkZD_LlHMEfGLh4YrB3cD2pcU7ro4VJzY_cmUnvg2G3qeCp4Cv8JgmOEH1G4EQNs437hj0nHEmC5wvA",
         message:"",
         formTools:{
           clearForm(formModels){
@@ -94,7 +97,7 @@
         color: inherit;
     }
 
-    input{
+    input, select{
         width: 80%;
         height: 45px;
         border: 0 none;
@@ -106,7 +109,7 @@
         
   }
 
-  input:focus{
+  input:focus, select:focus{
     box-shadow: 0 0 0 0;
     outline: 0;
     border-bottom: 2px solid rgba(0, 0, 0, 0.597);

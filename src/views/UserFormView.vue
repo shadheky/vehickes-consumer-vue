@@ -89,9 +89,9 @@
     padding: 30px;
     background-color: #fff;
     width: 80%;
-    height: 70vh;
+    height: 60%;
     max-width: 400px;
-    margin-top: 5%;
+    margin-top: 2%;
     border: 1px solid #ccc;
     border-radius: 10px;
   }
@@ -108,6 +108,7 @@
     align-items: center;
     width: 100%;
     margin-top: 10%;
+    
 
   }
   input{

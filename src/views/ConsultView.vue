@@ -29,11 +29,12 @@
           <span>
               Local de origem: {{vehicleData.plateLocation}}
           </span>
+          <span>Tipo da placa: {{plateService[vehicleData.service]}}</span>
           <span>
               Numero da placa: {{vehicleData.plateValue}}
           </span>
 
-          <span>
+          <span class="full-width">
               Numero da anterior da placa: {{vehicleData.previousPlateValue}}
           </span>
 
@@ -49,7 +50,7 @@
           <span>Nome do modelo: {{modelData.modelName}} </span>
           <span>Ano de fabricação: {{modelData.fabricationYear}}</span>
           <span>Ano do modelo: {{modelData.modelYear}}</span>
-          <span>Qunatidade de passageiros: {{modelData.passengers}}</span>
+          <span class="full-width">Qunatidade de passageiros: {{modelData.passengers}}</span>
        </div>
 
        <div>Multas</div>
@@ -109,6 +110,11 @@
           "SERIUS":"Séria",
           "VERY_SERIUS":"Muito Séria"
         },
+        plateService:{
+          "BrazilPlateService":"Brasil",
+          "MercosulPlateService":"Mercosul"
+        }
+        ,
         queryContentIsHide:true
       }
     },
@@ -216,7 +222,7 @@
     margin-top: 10px;
   }
   
-  #query-content div span{
+   span{
     width: 45%;
     background-color: #f9f6fa;
     border-radius: 4px;
@@ -241,6 +247,10 @@
     width: 100%;
     table-layout: fixed;
    font-size: .7em;
+  }
+
+  .full-width{
+    width: 100%;
   }
 
   td {

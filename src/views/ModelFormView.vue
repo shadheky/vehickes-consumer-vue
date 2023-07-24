@@ -1,32 +1,32 @@
 <template>
     <div class="form-container">
-        <h1>Cadastro de modelo</h1>
+        <h1>Cadastro de Modelo</h1>
         <form action="">
-        <label for="plateValue">Marca do modelo</label>
+        <label for="marca">Marca do modelo</label>
         <input type="text" 
             name='marca'
             autocomplete='off'
             placeholder='Chevrolet'
          v-model="modelForm.brand"/>  
-         <label for="plateValue">Nome do modelo</label>
+         <label for="nome">Nome do modelo</label>
          <input type="text" 
             name='nome'
             autocomplete='off'
             placeholder='Onix'
          v-model="modelForm.modelName"/>  
-         <label for="plateValue">Ano de fabricação</label> 
+         <label for="fabriAno">Ano de fabricação</label> 
            <input type="number"
             name='fabriAno'
             autocomplete='off'
             placeholder='2020'
          v-model="modelForm.fabricationYear"/> 
-            <label for="plateValue">Ano do modelo</label> 
+            <label for="modelAno">Ano do modelo</label> 
            <input type="number" 
             name='modelAno'
             autocomplete='off'
             placeholder='2021'
         v-model="modelForm.modelYear"/>  
-         <label for="plateValue">Quantidade de passageiros</label> 
+         <label for="passengers">Quantidade de passageiros</label> 
         <input type="number"
             name='passengers'
             autocomplete='off'

@@ -5,13 +5,19 @@ import ModelsView from "../views/ModelsView.vue"
 import ModelFormView from "../views/ModelFormView.vue"
 import LoginView from "../views/LoginView.vue"
 import UserFormView from "../views/UserFormView.vue"
+import VehicleForm from "../views/VehicleForm.vue"
 
 
 const routes = [
   {
     path: '/consulta',
-    name: 'consulta',
+    name: 'ConsultView',
     component: ConsultView
+  },
+  {
+    path: '/cadastro',
+    name: 'VehicleForm',
+    component: VehicleForm
   },
   {
     path: '/',

@@ -1,18 +1,31 @@
 <template>
-    <header id="menu">
+    <header id="menu" >
         <span id="logo" @click="closeMobileMenu()">
             <router-link to="/">Luiz</router-link>
         </span>
+        <div class="cad-opts desktop-cad" v-show="cadOptIsShowed">
+            <router-link to="/cadastro" @click="changeCurrentShowCadOpt"><Button class="btn-link">Veículos</Button></router-link>
+            <router-link to="/modelos/cadastro" ><Button class="btn-link" @click="changeCurrentShowCadOpt">Modelos</Button></router-link>
+            <router-link to="/usuario/cadastro" ><Button class="btn-link" @click="changeCurrentShowCadOpt">Uusário</Button></router-link>
+        </div>
         <ul options>
             <li>
                 <router-link to="/consulta">Consulta</router-link>
             </li>
             <li>
-                <router-link to="/modelos">Modelos</router-link></li>
+                <router-link to="/modelos">Modelos</router-link>
+            </li>
+            <li>
+                <a class="btn-cad" @click="changeCurrentShowCadOpt" >
+                    Cadastros
+                </a>
+            </li>
+            
             <li>
                 <router-link to="/usuario/login">Login</router-link>
             </li>
         </ul>  
+
        <button @click="changeCurrentMobileMenuSituation()">
             <img src="https://luzdigi.com.br/img/menu.png" alt="">
         </button>
@@ -24,6 +37,22 @@
             <li>
                 <router-link to="/modelos" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Modelos</Button></router-link>
             </li>
+            <li>
+               <Button class="btn-link" @click="changeCurrentShowCadOptMobile">Cadastros</Button>
+            </li>
+            <div class="cad-opts" v-show="cadMobileOptIsShowed">
+                <li>
+                    <router-link to="/cadastro" @click="changeCurrentMobileMenuSituation"><Button class="btn-link">Veículos</Button></router-link>
+            </li>
+            <li>
+                <router-link to="/modelos/cadastro" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Modelos</Button></router-link>
+            </li>
+            <li>
+                <router-link to="/usuario/cadastro" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Usuários</Button></router-link>
+            </li>
+            </div>
+
+
             <li>
                 <router-link to="/usuario/login" @click="changeCurrentMobileMenuSituation()"><Button class="btn-link">Login</Button></router-link>
             </li>
@@ -37,16 +66,25 @@
         name: "Navigation",
         data(){
             return{
-                mobileMenuIsShowded:false
+                mobileMenuIsShowded:false,
+                cadOptIsShowed:false,
+                cadMobileOptIsShowed:false
             }
         },
         methods:{
             changeCurrentMobileMenuSituation(){
-                this.mobileMenuIsShowded = !this.mobileMenuIsShowded;
+                  this.cadMobileOptIsShowed =false              
+                  this.mobileMenuIsShowded = !this.mobileMenuIsShowded;
             },
             closeMobileMenu(){
                 this.mobileMenuIsShowded = false;
-
+            },
+            changeCurrentShowCadOptMobile(){
+                this.cadMobileOptIsShowed = !this.cadMobileOptIsShowed;
+            }
+            ,
+            changeCurrentShowCadOpt(){
+                this.cadOptIsShowed = !this.cadOptIsShowed
             }
         }
     }
@@ -79,7 +117,7 @@
         list-style: none;
         display: flex;
         justify-content: space-around;
-        width: 40%;
+        width: 60%;
         height: 80%;
         align-items: center;
         margin: 0;
@@ -93,6 +131,20 @@
 
     [options] a:hover{
         background-color: #444;
+    }
+
+    .btn-cad{
+        cursor: pointer;
+    }
+
+    .desktop-cad{
+        position:absolute;
+        right: 14%;
+        top: 50px;
+        color: black;
+        width: 200px;
+        background-color: white;
+        padding: 10px;
     }
 
     #mobile-options{
@@ -156,7 +208,7 @@
         margin: auto;
     }
 
-    @media (max-width: 700px) { 
+    @media (max-width: 700px), (orientation: portrait) { 
 
      [options]{
         display: none;

@@ -59,7 +59,8 @@
             return{
                 modelsData: [],
                 tableIsShow:false,
-                modelName: ""
+                modelName: "",
+                modelInfo:{}
             }
 
         },
@@ -79,6 +80,12 @@
                 }
                 this.findModels(this.modelName);
                 this.tableIsShow = true;
+            },
+            async findModelById(id){
+                const req = await fetch(this.baseURL + `/api/models/${id}`);
+            },
+            showModelInfo(){
+
             }
         }
     }
