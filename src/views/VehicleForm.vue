@@ -103,7 +103,7 @@
                 try{
                     const res = await req.json();
                     if(res.message === "This cpf already registered in our data base with other name"){
-                        this.$emit('showMessage', "Nome já cadastrado com outro CPF");
+                        this.$emit('showMessage', "Cpf já cadastrado com outro nome");
                         return;
                     }else if(res.errors[0].error === "Cpf invalid"){
                         this.$emit('showMessage', "Cpf inválido");
@@ -119,8 +119,11 @@
                     this.$emit('showMessage', "Modelo não encontrado. Veja corretamente na aba de modelos");
                 }else if(req.status === 400){
                     this.$emit('showMessage', "Preencha as informações corretamente");
-                }else if(req.status===403){
+                }else if(req.status===403 || req.status === 500){
                     this.$emit('showMessage', "Realize o Login");
+                }else{
+                    this.$emit('showMessage', 'Veículo cadastrado');
+                    this.$emit('clearForm', this.vehicleForm);
                 }
 
               

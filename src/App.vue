@@ -21,8 +21,8 @@
 
     data(){
       return{
-        baseURL:"http://localhost:8080",
-        bearerToken:"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJMdWl6IEFsYmVydG8iLCJleHAiOjE2OTAyMzEwMDd9.zXCzwxOUkZD_LlHMEfGLh4YrB3cD2pcU7ro4VJzY_cmUnvg2G3qeCp4Cv8JgmOEH1G4EQNs437hj0nHEmC5wvA",
+        baseURL:"https://vehiclesapi-production-963d.up.railway.app",
+        bearerToken:"",
         message:"",
         formTools:{
           clearForm(formModels){

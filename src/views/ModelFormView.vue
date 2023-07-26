@@ -31,7 +31,7 @@
             name='passengers'
             autocomplete='off'
             placeholder='5'
-        v-model="modelForm.passengers"/>  
+        v-model="modelForm.quantityOfPassangers"/>  
 
         <button @click="persitModel" type="button" class="btn btn-success">Cadastrar</button>
         <router-link to="/" class="btn btn-danger">Cancelar</router-link>
@@ -51,7 +51,7 @@
                     modelName:"",
                     fabricationYear:"",
                     modelYear:"",
-                    passengers:null
+                    quantityOfPassangers:null
 
                  },
                 message:""

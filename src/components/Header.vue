@@ -1,5 +1,5 @@
 <template>
-    <header id="menu" >
+    <header id="menu">
         <span id="logo" @click="closeMobileMenu()">
             <router-link to="/">Luiz</router-link>
         </span>

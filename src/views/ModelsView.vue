@@ -6,6 +6,9 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <div id="models-info" v-show="tableIsShow">
+            <p>
+                Clique Nos registros para mais informações
+            </p>
             <table>
                <thead class="t-head">
                     <th>
@@ -24,7 +27,7 @@
                         Passageiros
                     </th>
                </thead>
-                <tr v-for="model in modelsData" :key="model.id">
+                <tr v-for="model in modelsData" :key="model.id" @click="showPopupModelInfo(model.id)">
                     <td>
                         {{ model.brand }}
                     </td>
@@ -42,8 +45,23 @@
                     </td>
                 </tr>
             </table>
-            <p>Não encontrou o modelo desejado? <router-link to="/modelos/cadastro" class="link">Adicione</router-link> </p>
-           
+            
+            <p>
+                Não encontrou o modelo desejado? <router-link to="/modelos/cadastro" class="link">Adicione</router-link> 
+            </p>
+         
+        </div>
+        <div class="popup-container" v-show="popUpIsShow" @click="hidePopup($event)">
+            <div class="popup-wrapper">
+                <h1>Informações do veículo</h1>
+                <div>ID: {{modelInfo.id}}</div>
+                <div>Marca: {{modelInfo.brand}}</div>
+                <div>Nome: {{modelInfo.modelName}}</div>
+                <div>Ano de Fabricação: {{modelInfo.fabricationYear}}</div>
+                <div>Ano do Modelo: {{modelInfo.modelYear}}</div>
+                <div>Quantidade de passageiros: {{modelInfo.quantityOfPassangers}}</div>
+                <button @click="hidePopup($event)" class="btn btn-danger">Voltar</button>
+            </div>
         </div>
    </div>
 </template>
@@ -60,15 +78,13 @@
                 modelsData: [],
                 tableIsShow:false,
                 modelName: "",
-                modelInfo:{}
+                modelInfo:{},
+                popUpIsShow:false
             }
 
         },
         methods:{
             async findModels(name){
-
-         
-
                 const req =  await fetch(this.baseURL + `/api/models/find/${name}`);
 
                 this.modelsData = await req.json();
@@ -83,9 +99,17 @@
             },
             async findModelById(id){
                 const req = await fetch(this.baseURL + `/api/models/${id}`);
+                this.modelInfo = await req.json();
+                console.log(this.modelInfo);
             },
-            showModelInfo(){
-
+                showPopupModelInfo(id){
+                this.findModelById(id);
+                this.popUpIsShow = true;
+             },
+            hidePopup(e){
+                if(e.target.classList.contains('popup-container') || e.target.tagName === 'BUTTON'){
+                    this.popUpIsShow = false;
+                }                
             }
         }
     }
@@ -161,15 +185,13 @@
 
 
   td, th{
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding: 12px 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 12px 12px;
+    cursor: pointer;
+    }
  
-}
-
-  
-    
     table tr:nth-child(odd){
         background-color: #ccc;
     }
@@ -182,6 +204,50 @@
 
   .link{
     text-decoration: underline;
+  }
+
+  .popup-container{
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #cccccc8f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .popup-wrapper{
+    width: 100%;
+    max-width: 400px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 25px;
+  }
+
+  .popup-wrapper h1{
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
+  }
+
+  .popup-wrapper div{
+    height: 14%;
+    border: 1px solid #ccc;
+
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 13px;
   }
 
   @media (max-width:700px){
