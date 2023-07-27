@@ -5,7 +5,7 @@
         <form action="">
             <label for="purchaseDate">Data de compra</label>
         <input type="date" 
-            name='purchaseDate'
+            id='purchaseDate'
             autocomplete='off'
             :max="maxDate"
             v-model="vehicleForm.purchaseDate"
@@ -13,7 +13,7 @@
         
          <label for="color">Cor do Veículo</label>
         <input type="text" 
-            name='color'
+            id='color'
             autocomplete='off'
             placeholder="Azul"
             v-model="vehicleForm.color"
@@ -21,7 +21,7 @@
 
          <label for="modelId">Id do modelo</label>
         <input type="number" 
-            name='modelId'
+            id='modelId'
             autocomplete='off'
             placeholder="5"
             v-model="vehicleForm.modelId"
@@ -29,14 +29,14 @@
 
          <label for="local">Localização</label>
         <input type="text" 
-            name='local'
+            id='local'
             autocomplete='off'
             placeholder="belem-pa"
             v-model="vehicleForm.plateLocation"
          /> 
 
          <label for="service">Serviço de placa</label>
-        <select name="service" id="" v-model="vehicleForm.service">
+        <select id="service" v-model="vehicleForm.service">
             <option value="">Selecione</option>
             <option value="MercosulPlateService">Placa Mercosul</option>
             <option value="BrazilPlateService">Placa Brazil</option>
@@ -44,16 +44,16 @@
          
          <label for="ownerName">Nome do proprietário</label>
         <input type="text" 
-            name='ownerName'
+            id='ownerName'
             autocomplete='off'
             placeholder="Elias Nascimento"
             v-model="vehicleForm.ownerName"
          />
 
          
-         <label for="local">Cpf do proprietário</label>
+         <label for="cpf">Cpf do proprietário</label>
         <input type="text" 
-            name='local'
+            id='cpf'
             autocomplete='off'
             placeholder="069.247.770-58"
             v-model="vehicleForm.ownerCpf"
@@ -156,6 +156,7 @@
         border-radius: 20px;
         margin-top: 2%;
         margin-bottom: 2%;
+       
     }
 
     label{
@@ -163,6 +164,8 @@
         margin: 20px 0px 10px 10%;
         font-size: 1.1em;
         color: #3b68a8;
+        top: 15px;
+        left: 5px;
     }
 
     .btn{
