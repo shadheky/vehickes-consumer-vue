@@ -13,12 +13,6 @@
       Header,
       Message
     },
-    load(){
-      if(this.bearerToken === ''){
-        this.showMessgeAndHide('Usuário não logado');
-      }
-    },
-
     data(){
       return{
         baseURL:"https://vehiclesapi-production-963d.up.railway.app",
@@ -46,6 +40,10 @@
 
       }
     },
+    mounted(){
+      this.loadToken();
+    },
+
     methods:{
       async authenticate(login, password){
         const req = await fetch(this.baseURL + `/api/users/auth`, {
@@ -60,20 +58,25 @@
            
           }
         });
-        if(req.status === 404 || req.status ===  403 || req.status === 400){
-          this.showMessgeAndHide('Credenciais inválidas');
-        }else{
+        if(req.status === 200){
           const res = await req.json();
           this.bearerToken = res.token;
-          this.showMessgeAndHide('Logado com sucesso')
+          this.showMessgeAndHide('Logado com sucesso');
+          localStorage.setItem('token', this.bearerToken)
+          return
         }
+
+        this.showMessgeAndHide('Credenciais inválidas')
+
       },
       showMessgeAndHide(text){
         this.message = text;
         setTimeout( () => this.message = "", 3000)
       },
-    }
-  }
+      loadToken(){
+        this.bearerToken = localStorage.getItem('token')
+      }
+  }}
 
 </script>
 
