@@ -60,7 +60,7 @@
            
           }
         });
-        if(req.status === 404 || req.status ===  403){
+        if(req.status === 404 || req.status ===  403 || req.status === 400){
           this.showMessgeAndHide('Credenciais inválidas');
         }else{
           const res = await req.json();

@@ -3,10 +3,10 @@
     <form action="" id="query-form" v-show="queryContentIsHide">
         <h1>Consulte o seu veículo</h1>
         <label for="plateValue">Número da placa</label>
-        <input type="text" name='plateValue' autocomplete='off' placeholder='QEZ2738' v-model="form.plateValue"/>
+        <input type="text" id='plateValue' autocomplete='off' placeholder='QEZ2738' v-model="form.plateValue"/>
 
-        <label for="plateValue">Renavam</label>
-        <input type="text" name='renavam' autocomplete='off' placeholder='481014772' v-model="form.renavam"/>
+        <label for="renavam">Renavam</label>
+        <input type="text" id='renavam' autocomplete='off' placeholder='481014772' v-model="form.renavam"/>
         <button @click="findVehicle()" type="button" class="btn btn-success form-button" >Pesquisar</button>
    
     </form>
