@@ -6,7 +6,7 @@
         <div class="cad-opts desktop-cad" v-show="cadOptIsShowed">
             <router-link to="/cadastro" @click="changeCurrentShowCadOpt"><Button class="btn-link">Veículos</Button></router-link>
             <router-link to="/modelos/cadastro" ><Button class="btn-link" @click="changeCurrentShowCadOpt">Modelos</Button></router-link>
-            <router-link to="/usuario/cadastro" ><Button class="btn-link" @click="changeCurrentShowCadOpt">Uusário</Button></router-link>
+            <router-link to="/usuario/cadastro" ><Button class="btn-link" @click="changeCurrentShowCadOpt">Usuário</Button></router-link>
         </div>
         <ul options>
             <li>
