@@ -41,7 +41,7 @@
                         {{ model.modelYear }}
                     </td>
                     <td>
-                        {{ model.passengers }}
+                        {{ model.quantityOfPassangers }}
                     </td>
                 </tr>
             </table>
