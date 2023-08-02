@@ -171,9 +171,9 @@
       },
 
       async updatePlateToMercosulPlate(plateValue){
-        const req = await fetch(`${this.baseURL}/api/vehicles/${plateValue}`, {
+        const req = await fetch(`${this.baseURL}/api/vehicles`, {
           method:"PATCH",
-          body:{},
+          body:JSON.stringify({plateValue}),
           headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json',
