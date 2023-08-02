@@ -69,6 +69,9 @@
             </tr>
            
        </table>
+
+       <p @click="updatePlateToMercosulPlate(vehicleData.plateValue)" v-show="vehicleData.service === 'BrazilPlateService'" id="changePlate">Clique aqui para atualizar a placa</p>
+       
     </div>
 
 
@@ -77,11 +80,6 @@
 
 <script>
  
-
-
-
- 
-
   export default {
     
     name: "ConsultView",
@@ -119,7 +117,8 @@
       }
     },
     props:{
-      baseURL:String
+      baseURL:String,
+      bearerToken:String
     },
     methods:{
       async findVehicle(){
@@ -131,19 +130,32 @@
         }
 
         const req = await fetch(`${this.baseURL}/api/vehicles/${this.form.plateValue}/${this.form.renavam}`);
-        
-        if(req.status === 404){
-          this.$emit('showMessage', "Veculo não encontrado");
-        }else if(req.status === 200){
+
+          try{
+            this.HttpRequestErrors(req.status);
+          }catch(error){
+            this.$emit('showMessage', error);
+            return;
+          }
+
           this.vehicleData = await req.json()
           this.findModel(this.vehicleData.modelId);
           this.showQueryContent();
-        
-        }else{
-          this.$emit('showMessage',"Houve um erro ao carregar as informações");
-        }
-
       },
+
+      HttpRequestErrors(status = 200){
+          const errors = {
+            400: () => { throw "Informações incorretas" },
+            404: () => { throw "Veículo não encontrado" },
+            403: () => { throw "Realize Login" },
+            500: () => { throw "Realize Login" },
+            200: () => {}
+          }
+
+          errors[status]();
+
+        },
+
       async findModel(modelId){
         const req = await fetch(`${this.baseURL}/api/models/${modelId}`);
         this.modelData = await req.json();
@@ -156,6 +168,27 @@
         this.queryContentIsHide = true;
         this.modelData = {};
         this.$emit('clearForm', this.form);
+      },
+
+      async updatePlateToMercosulPlate(plateValue){
+        const req = await fetch(`${this.baseURL}/api/vehicles/${plateValue}`, {
+          method:"PATCH",
+          body:{},
+          headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + this.bearerToken
+          }
+        });
+
+        try{
+          this.HttpRequestErrors(req.status);
+        }catch(error){
+          this.$emit('showMessage', error);
+          return;
+        }
+
+        this.vehicleData = await req.json();
       }
 
      }
@@ -263,6 +296,10 @@
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     
+  }
+
+  #changePlate{
+    cursor: pointer;
   }
 
 </style>

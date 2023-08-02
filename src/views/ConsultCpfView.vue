@@ -107,11 +107,15 @@
         },
 
         HttpRequestErrors(status = 200){
-        if(status === 400){
-            throw "Informações incorretas"
-          }else if(status === 404){
-            throw "Proprietário não encontrado"
+          const errors = {
+            400: () => { throw "Informações incorretas" },
+            404: () => { throw "Proprietário não encontrado" },
+            403: () => { throw "Realize Login" },
+            500: () => { throw "Realize Login" },
+            200: () => {}
           }
+
+          errors[status]();
         },
 
         hideTable(){

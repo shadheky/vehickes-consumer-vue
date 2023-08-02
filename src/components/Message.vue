@@ -31,6 +31,7 @@
         right: 2%;
         display: flex;
         flex-wrap: wrap;
+        z-index: 10;
     }
 
     .content{
