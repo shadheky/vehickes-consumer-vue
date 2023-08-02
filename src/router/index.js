@@ -6,7 +6,7 @@ import ModelFormView from "../views/ModelFormView.vue"
 import LoginView from "../views/LoginView.vue"
 import UserFormView from "../views/UserFormView.vue"
 import VehicleForm from "../views/VehicleForm.vue"
-
+import ConsultCpfView from "../views/ConsultCpfView.vue"
 
 const routes = [
   {
@@ -43,6 +43,12 @@ const routes = [
     path: '/modelos/cadastro',
     name: 'ModelFormView',
     component: ModelFormView
+  }
+  ,
+  {
+    path: '/consulta/cpf',
+    name: 'ConsultCpfView',
+    component: ConsultCpfView
   }
 ]
 

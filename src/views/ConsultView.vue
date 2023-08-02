@@ -8,7 +8,7 @@
         <label for="renavam">Renavam</label>
         <input type="text" id='renavam' autocomplete='off' placeholder='481014772' v-model="form.renavam"/>
         <button @click="findVehicle()" type="button" class="btn btn-success form-button" >Pesquisar</button>
-   
+        <router-link to="/consulta/cpf">Pesquisar por CPF</router-link>
     </form>
 
     <div id="query-content" v-show="!queryContentIsHide">
